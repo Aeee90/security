@@ -1,6 +1,5 @@
-package aeee.api.security.data.entity
+package aeee.api.security.entity
 
-import java.security.AuthProvider
 
 class User {
     var id: Long = 0

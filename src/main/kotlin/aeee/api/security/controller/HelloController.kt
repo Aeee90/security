@@ -9,4 +9,14 @@ class HelloController {
     @GetMapping("/hello")
     fun hello() = "Hello, Security!"
 
+    @GetMapping("/login/oauth2/code/facebook")
+    fun facebook(): String {
+        return "facebook"
+    }
+
+    @GetMapping("/test/hello")
+    fun testHello(): String{
+        return "is test, Hello!"
+    }
+
 }

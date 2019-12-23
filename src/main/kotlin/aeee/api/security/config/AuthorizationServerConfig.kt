@@ -1,25 +1,38 @@
 package aeee.api.security.config
 
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.crypto.factory.PasswordEncoderFactories
-import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.authentication.AuthenticationManager
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer
 
 @Configuration
-class AuthorizationServerConfig: AuthorizationServerConfigurerAdapter() {
+class AuthorizationServerConfig(
+    private val authenticationManager: AuthenticationManager
+    , private val userDetailsService: UserDetailsService
+    , private val jwtTokenStoreConfig: JwtTokenStoreConfig
+): AuthorizationServerConfigurerAdapter() {
 
-    @Bean
-    fun passwordEncoder(): PasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
+
 
     override fun configure(clients: ClientDetailsServiceConfigurer) {
         clients.inMemory()
-            .withClient("first-client")
-            .secret(passwordEncoder().encode("noonewilleverguess"))
-            .scopes("resource:read")
-            .authorizedGrantTypes("authorization_code")
-            .redirectUris("http://localhost:8081/oauth/login/client-app")
+            .withClient("eagleeye")
+            .secret("{noop}thisissecret")
+            .scopes("webclient", "mobileclient")
+            .authorizedGrantTypes("refresh_token", "password", "client_credentials")
+            //.redirectUris("http://localhost:8081/oauth/login/client-app")
+    }
+
+
+    override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
+
+        endpoints
+                .tokenStore(jwtTokenStoreConfig.tokenStore())
+                .accessTokenConverter(jwtTokenStoreConfig.jwtAccessTokenConvert())
+                .authenticationManager(authenticationManager)
+                .userDetailsService(userDetailsService)
     }
 
 }

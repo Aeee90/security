@@ -21,8 +21,13 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	
 	compile("org.springframework.boot:spring-boot-starter-web")
+	
+	//Security
 	compile("org.springframework.security:spring-security-web:5.2.1.RELEASE")
+	compile("org.springframework.security.oauth:spring-security-oauth2:2.4.0.RELEASE")
 	compile("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.2.1.RELEASE")
+	compile("org.springframework.security:spring-security-oauth2-client:5.2.1.RELEASE")
+	compile("io.jsonwebtoken:jjwt:0.9.1")
 	
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

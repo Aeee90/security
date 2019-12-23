@@ -1,0 +1,16 @@
+server:
+  port: 4000
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            clientId: 750303735384281
+            clientSecret: dcc3fbcb5e467fc0b12f137d878a9e5b
+            accessTokenUri: https://graph.facebook.com/oauth/access_token
+            userAuthorizationUri: https://www.facebook.com/dialog/oauth
+            scope:
+              - email
+              - public_profile
