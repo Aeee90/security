@@ -24,10 +24,15 @@ dependencies {
 	
 	//Security
 	compile("org.springframework.security:spring-security-web:5.2.1.RELEASE")
+	compile("org.springframework.security:spring-security-oauth2-client:5.2.1.RELEASE")
+
+	//Resource Server
+	compile("org.springframework.boot:spring-boot-starter-oauth2-resource-server:2.2.2.RELEASE")
+
+	//Authorization Server
 	compile("org.springframework.security.oauth:spring-security-oauth2:2.4.0.RELEASE")
 	compile("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.2.1.RELEASE")
-	compile("org.springframework.security:spring-security-oauth2-client:5.2.1.RELEASE")
-	compile("io.jsonwebtoken:jjwt:0.9.1")
+	compile("com.nimbusds:nimbus-jose-jwt:8.4")
 	
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

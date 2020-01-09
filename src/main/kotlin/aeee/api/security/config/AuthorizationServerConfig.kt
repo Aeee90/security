@@ -18,11 +18,10 @@ class AuthorizationServerConfig(
 
     override fun configure(clients: ClientDetailsServiceConfigurer) {
         clients.inMemory()
-            .withClient("eagleeye")
-            .secret("{noop}thisissecret")
+            .withClient("bael-client")
+            .secret("{noop}bael-secret")
             .scopes("webclient", "mobileclient")
             .authorizedGrantTypes("refresh_token", "password", "client_credentials")
-            //.redirectUris("http://localhost:8081/oauth/login/client-app")
     }
 
 

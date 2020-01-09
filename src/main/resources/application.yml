@@ -1,6 +1,5 @@
 server:
   port: 4000
-
 spring:
   security:
     oauth2:
@@ -14,3 +13,9 @@ spring:
             scope:
               - email
               - public_profile
+      resourceserver:
+        opaquetoken:
+          client-id: bael-client
+          client-secret: bael-secret
+        jwt:
+          jwk-set-uri: http://localhost:4000/.well-known/jwks.json
