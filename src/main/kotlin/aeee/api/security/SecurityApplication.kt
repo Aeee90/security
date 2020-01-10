@@ -14,7 +14,6 @@ fun main(args: Array<String>) {
 }
 
 @SpringBootApplication
-@EnableResourceServer
 @EnableAuthorizationServer
 @RestController
 class SecurityApplication {

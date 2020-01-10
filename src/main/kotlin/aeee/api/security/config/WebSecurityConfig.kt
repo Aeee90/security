@@ -7,10 +7,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.oauth2.jwt.JwtDecoder
 
 
 @Configuration
-class WebSecurityConfig: WebSecurityConfigurerAdapter() {
+class WebSecurityConfig(
+    private val jwtDecoder: JwtDecoder
+): WebSecurityConfigurerAdapter() {
 
     @Bean
     override fun authenticationManager(): AuthenticationManager {
@@ -35,7 +38,7 @@ class WebSecurityConfig: WebSecurityConfigurerAdapter() {
             .authorizeRequests()
             .anyRequest().authenticated().and()
             .oauth2Login().and()
-//            .oauth2ResourceServer()
-//                .jwt()
+            .oauth2ResourceServer()
+                .jwt {jwt -> jwt.decoder(jwtDecoder)}
     }
 }
